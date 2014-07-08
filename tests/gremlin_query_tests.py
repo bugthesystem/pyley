@@ -1,17 +1,20 @@
-__author__ = 'ziyasal'
-
-from unittest import TestCase
-
-
-class gremlin_query_tests(TestCase):
-    @classmethod
-    def setUpClass(cls):
-        print(0)
+import unittest
+from pyley.GraphObject import GraphObject
 
 
-    def graph_vertex_query_test(self):
-        self.assertEqual(True, True)
+class GremlinQueryTests(unittest.TestCase):
+    def setUp(self):
+        self.opts = dict(url='http://localhost:64210/api/v1/query/gremlin')
 
-    @classmethod
-    def tearDownClass(cls):
-        print(0)
+    def test_vertex_query(self):
+        g = GraphObject()
+        query = g.Vertex()
+        self.assertEqual(query.build(), 'g.V()')
+
+    def test_morphism_query(self):
+        g = GraphObject()
+        query = g.Morphism()
+        self.assertEqual(query.build(), 'g.Morphism()')
+
+if __name__ == '__main__':
+    unittest.main()
