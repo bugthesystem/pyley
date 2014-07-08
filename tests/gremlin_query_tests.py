@@ -1,5 +1,5 @@
 import unittest
-from pyley.GraphObject import GraphObject
+from pyley.graph import GraphObject
 
 
 class GremlinQueryTests(unittest.TestCase):
@@ -10,7 +10,6 @@ class GremlinQueryTests(unittest.TestCase):
         g = GraphObject()
         query = g.Vertex()
         self.assertEqual(query.build(), 'g.V()')
-
     def test_morphism_query(self):
         g = GraphObject()
         query = g.Morphism()

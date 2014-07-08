@@ -1,4 +1,4 @@
-from pyley.GremlinQuery import GremlinQuery
+from pyley.gremlin_query import GremlinQuery
 
 
 class GraphObject():
