@@ -33,6 +33,6 @@ class GremlinQuery:
         return self
 
     def All(self):
-        q = _QueryDefinition(".All()", True)
+        q = _QueryDefinition(".All()")
         self.queryDeclarations.put(q)
         return self
