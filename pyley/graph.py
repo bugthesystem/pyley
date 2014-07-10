@@ -10,16 +10,15 @@ class GraphObject():
         return GremlinQuery("g.V()")
 
     def V(self, *node_ids):
-        builder = ""
+        builder = []
         l = len(node_ids)
         for index, node_id in enumerate(node_ids):
             if index == l - 1:
-                builder += u"'{0:s}'".format(node_id)
+                builder.append(u"'{0:s}'".format(node_id))
             else:
-                builder += u"'{0:s}',".format(node_id)
-
-        s__format = u"g.V({0:s})".format(builder)
-        return GremlinQuery(s__format)
+                builder.append(u"'{0:s}',".format(node_id))
+        
+        return GremlinQuery(u"g.V({0:s})".format(''.join(builder)))
 
     def M(self):
         return GremlinQuery("g.Morphism()")
