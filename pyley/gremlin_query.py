@@ -21,11 +21,11 @@ class GremlinQuery:
         self.queryDeclarations.put(q)
 
     def build(self):
-        query = ''
+        query = []
         while not self.queryDeclarations.empty():
             q_def = self.queryDeclarations.get()
-            query += q_def.build()
-        return query
+            query.append(q_def.build())
+        return ''.join(query)
 
     def Out(self, label):
         q = _QueryDefinition(".Out('%s')", label, True)
