@@ -46,7 +46,7 @@ Python client for an open-source graph database [Cayley](https://github.com/goog
    film_to_actor = g.Morphism().Out("/film/film/starring").Out("/film/performance/actor")
    query = g.V()
             .Has("name", "Casablanca")
-            .Follow(filmToActor)
+            .Follow(film_to_actor)
             .Out("name")
             .All()
   response = client.Send(query)
