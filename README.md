@@ -1,4 +1,4 @@
-pyley : Python Client for Cayley Graph Database
+pyley
 =====
 
 Python client for an open-source graph database [Cayley](https://github.com/google/cayley)
