@@ -9,6 +9,6 @@ setup(
     author='ziyasal',
     author_email='sarikayaziya@gmail.com',
     description='Python client for an open-source graph database Cayley',
-    install_requires=[''],
+    install_requires=['requests'],
     include_package_data=True
 )
