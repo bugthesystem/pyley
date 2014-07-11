@@ -3,6 +3,9 @@ from pyley.gremlin_query import GremlinQuery
 
 
 class GraphObject():
+    def __init__(self):
+        pass
+
     def V(self):
         return GremlinQuery("g.V()")
 
