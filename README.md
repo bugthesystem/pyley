@@ -13,7 +13,7 @@ Python client for an open-source graph database [Cayley](https://github.com/goog
 
   // Start with only one vertex, the literal name "Humphrey Bogart", and retreive all of them.
   query=g.Vertex("Humphrey Bogart").All();
-  response = client.Send(query) #response.RawText contains raw JSON data
+  response = client.Send(query) #response contains JSON data
   
   # `g` and `V` are synonyms for `graph` and `Vertex` respectively, as they are quite common.
   query=g.V("Humphrey Bogart").All()
