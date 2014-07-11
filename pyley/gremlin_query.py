@@ -27,9 +27,6 @@ class GremlinQuery:
 
         return "".join(builder)
 
-    def __store(self, q):
-        self.queryDeclarations.put(q)
-
     def Out(self, label):
         q = _QueryDefinition(".Out('%s')", label)
         self.queryDeclarations.put(q)
@@ -59,7 +56,8 @@ class GremlinQuery:
         elif isinstance(query, GremlinQuery):
             q = _QueryDefinition(".Follow(%s)", query.build())
         else:
-            raise Exception("Invalid parameter in follow query")
+            raise Exception("Invalid query parameter")
 
         self.queryDeclarations.put(q)
+        
         return self
