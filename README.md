@@ -63,6 +63,6 @@ If you encounter a bug, performance issue, or malfunction, please add an [Issue]
 - Improve Gremlin implementation (Basic steps implemented at the moment)
 - Add more tests
 - Add more documentation
-- 
+
 ##Ooen Source  Projects in Use
-- [requests](https://github.com/kennethreitz/requests) by @kennethreitz
+- [requests](https://github.com/kennethreitz/requests) by [](@kennethreitz)
