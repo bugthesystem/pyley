@@ -65,7 +65,7 @@ class GremlinQueryTests(unittest.TestCase):
                                  ".Out('name')"
                                  ".All()")
 
-    def test_follow_with_morphism_path(self):
+    def test_follow_with_morphism_path_and_typed_query(self):
         g = GraphObject()
         film_to_actor = g.Morphism().Out("/film/film/starring").Out("/film/performance/actor")
         query = g.V().Has("name", "Casablanca").Follow(film_to_actor).Out("name").All()
@@ -76,6 +76,19 @@ class GremlinQueryTests(unittest.TestCase):
                                  "g.Morphism().Out('/film/film/starring').Out('/film/performance/actor')"
                                  ").Out('name')"
                                  ".All()")
+
+    def test_follow_with_morphism_path_and_str_query(self):
+        g = GraphObject()
+        film_to_actor = g.Morphism().Out("/film/film/starring").Out("/film/performance/actor")
+        query = g.V().Has("name", "Casablanca").Follow(film_to_actor.build()).Out("name").All()
+        actual = query.build()
+        print actual
+        self.assertEqual(actual, "g.V().Has('name','Casablanca')"
+                                 ".Follow("
+                                 "g.Morphism().Out('/film/film/starring').Out('/film/performance/actor')"
+                                 ").Out('name')"
+                                 ".All()")
+
 
 if __name__ == '__main__':
     unittest.main()
