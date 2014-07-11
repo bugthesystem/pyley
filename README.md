@@ -64,7 +64,7 @@ If you encounter a bug, performance issue, or malfunction, please add an [Issue]
 - Add more tests
 - Add more documentation
 
-##Ooen Source  Projects in Use
+##Open Source  Projects in Use
 - [requests](https://github.com/kennethreitz/requests) by @kennethreitz
 
 ##License
