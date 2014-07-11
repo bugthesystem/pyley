@@ -8,7 +8,11 @@ pyley
 ##Sample
 
 ```python
-  client = CayleyClient("http://localhost:64210/api/v1/query/gremlin")
+  #Create cayley client
+  client = CayleyClient() # this creates client with default parameters `http://localhost:64210/api/v1/query/gremlin`
+  #or  specity `url` and `version` parameters
+  client = CayleyClient("http://localhost:64210","v1")
+  
   g = GraphObject()
 
   // Start with only one vertex, the literal name "Humphrey Bogart", and retrieve all of them.
