@@ -17,8 +17,8 @@ class GraphObject():
                 builder.append(u"'{0:s}'".format(node_id))
             else:
                 builder.append(u"'{0:s}',".format(node_id))
-        
-        return GremlinQuery(u"g.V({0:s})".format(''.join(builder)))
+
+        return GremlinQuery(u"g.V({0:s})".format("".join(builder)))
 
     def M(self):
         return GremlinQuery("g.Morphism()")

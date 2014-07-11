@@ -2,37 +2,53 @@ import Queue
 
 
 class _QueryDefinition:
-    def __init__(self, token, parameters=dict(), has_parameter=False):
+    def __init__(self, token, *parameters):
         self.token = token
         self.parameters = parameters
-        self.has_parameter = has_parameter
 
     def build(self):
-        if self.has_parameter:
+        if len(self.parameters) > 0:
             return self.token % self.parameters
         else:
             return self.token
 
 
 class GremlinQuery:
-    def __init__(self, token, parameters=dict()):
+    def __init__(self, token, *parameters):
         self.queryDeclarations = Queue.Queue()
-        q = _QueryDefinition(token, parameters)
+        q = _QueryDefinition(token, parameters) if len(parameters) > 0 else _QueryDefinition(token)
         self.queryDeclarations.put(q)
 
     def build(self):
-        query = []
+        builder = []
         while not self.queryDeclarations.empty():
-            q_def = self.queryDeclarations.get()
-            query.append(q_def.build())
-        return ''.join(query)
+            query_def = self.queryDeclarations.get()
+            builder.append(query_def.build())
+
+        return "".join(builder)
+
+    def __store(self, q):
+        self.queryDeclarations.put(q)
 
     def Out(self, label):
-        q = _QueryDefinition(".Out('%s')", label, True)
+        q = _QueryDefinition(".Out('%s')", label)
         self.queryDeclarations.put(q)
+
         return self
 
     def All(self):
         q = _QueryDefinition(".All()")
+        self.queryDeclarations.put(q)
+
+        return self
+
+    def In(self, label):
+        q = _QueryDefinition(".In('%s')", label)
+        self.queryDeclarations.put(q)
+
+        return self
+
+    def Has(self, label, val):
+        q = _QueryDefinition(".Has('%s','%s')", label, val)
         self.queryDeclarations.put(q)
         return self

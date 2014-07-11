@@ -25,14 +25,30 @@ class GremlinQueryTests(unittest.TestCase):
     def test_out_query(self):
         g = GraphObject()
         query = g.V().Out('name')
-        temp_query = query.build()
-        self.assertEqual(temp_query, "g.V().Out('name')")
+        actual = query.build()
+        print actual
+        self.assertEqual(actual, "g.V().Out('name')")
 
     def test_all_query(self):
         g = GraphObject()
         query = g.V("Humphrey Bogart").All()
-        temp_query = query.build()
-        self.assertEqual(temp_query, "g.V('Humphrey Bogart').All()")
+        actual = query.build()
+        print actual
+        self.assertEqual(actual, "g.V('Humphrey Bogart').All()")
+
+    def test_in_query(self):
+        g = GraphObject()
+        query = g.V().In("name").All()
+        actual = query.build()
+        print actual
+        self.assertEqual(actual, "g.V().In('name').All()")
+
+    def test_has_query(self):
+        g = GraphObject()
+        query = g.V().Has("name", "Casablanca").All()
+        actual = query.build()
+        print actual
+        self.assertEqual(actual, "g.V().Has('name','Casablanca').All()")
 
 
 if __name__ == '__main__':
