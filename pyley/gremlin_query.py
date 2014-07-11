@@ -52,3 +52,14 @@ class GremlinQuery:
         q = _QueryDefinition(".Has('%s','%s')", label, val)
         self.queryDeclarations.put(q)
         return self
+
+    def Follow(self, query):
+        if isinstance(query, str):
+            q = _QueryDefinition(".Follow(%s)", query)
+        elif isinstance(query, GremlinQuery):
+            q = _QueryDefinition(".Follow(%s)", query.build())
+        else:
+            raise Exception("Invalid parameter in follow query")
+
+        self.queryDeclarations.put(q)
+        return self

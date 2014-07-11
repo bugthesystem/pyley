@@ -50,6 +50,32 @@ class GremlinQueryTests(unittest.TestCase):
         print actual
         self.assertEqual(actual, "g.V().Has('name','Casablanca').All()")
 
+    def test_complex_query1(self):
+        g = GraphObject()
+        query = g.V().Has("name", "Casablanca") \
+            .Out("/film/film/starring") \
+            .Out("/film/performance/actor") \
+            .Out("name") \
+            .All()
+        actual = query.build()
+        print actual
+        self.assertEqual(actual, "g.V().Has('name','Casablanca')"
+                                 ".Out('/film/film/starring')"
+                                 ".Out('/film/performance/actor')"
+                                 ".Out('name')"
+                                 ".All()")
+
+    def test_follow_with_morphism_path(self):
+        g = GraphObject()
+        film_to_actor = g.Morphism().Out("/film/film/starring").Out("/film/performance/actor")
+        query = g.V().Has("name", "Casablanca").Follow(film_to_actor).Out("name").All()
+        actual = query.build()
+        print actual
+        self.assertEqual(actual, "g.V().Has('name','Casablanca')"
+                                 ".Follow("
+                                 "g.Morphism().Out('/film/film/starring').Out('/film/performance/actor')"
+                                 ").Out('name')"
+                                 ".All()")
 
 if __name__ == '__main__':
     unittest.main()
