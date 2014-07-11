@@ -1,7 +1,7 @@
 pyley
 =====
 
-Python client for an open-source graph database [Cayley](https://github.com/google/cayley)
+[Python](https://www.python.org/) client for an open-source graph database [**Cayley**](https://github.com/google/cayley)
 
 > Cayley is an open-source graph inspired by the graph database behind [Freebase](http://freebase.com/) and Google's [Knowledge Graph](http://www.google.com/insidesearch/features/search/knowledge.html). Its goal is to be a part of the developer's toolbox where [Linked Data](http://linkeddata.org/) and graph-shaped data (semantic webs, social networks, etc) in general are concerned.
 
@@ -14,7 +14,7 @@ Python client for an open-source graph database [Cayley](https://github.com/goog
   // Start with only one vertex, the literal name "Humphrey Bogart", and retrieve all of them.
   query=g.Vertex("Humphrey Bogart").All();
   response = client.Send(query)
-  #response.result contains JSON data and response.r contains raw response
+  # **response.result** contains JSON data and **response.r** contains raw response
   print response.result 
   
   # `g` and `V` are synonyms for `graph` and `Vertex` respectively, as they are quite common.
@@ -36,26 +36,26 @@ Python client for an open-source graph database [Cayley](https://github.com/goog
   response = client.Send(query)
   
   # Let's get the list of actors in the film
-  query = g.V().Has("name", "Casablanca")
-                .Out("/film/film/starring")
-                .Out("/film/performance/actor")
-                .Out("name")
+  query = g.V().Has("name", "Casablanca") \
+                .Out("/film/film/starring") \
+                .Out("/film/performance/actor") \
+                .Out("name") \
                 .All()
 
   response = client.Send(query)
   
   # But this is starting to get long. Let's use a morphism -- a pre-defined path stored in a variable -- as our linkage
    film_to_actor = g.Morphism().Out("/film/film/starring").Out("/film/performance/actor")
-   query = g.V()
-            .Has("name", "Casablanca")
-            .Follow(film_to_actor)
-            .Out("name")
+   query = g.V() \
+            .Has("name", "Casablanca") \
+            .Follow(film_to_actor) \
+            .Out("name") \
             .All()
   response = client.Send(query)
 
   # Add data programatically to the JSON result list. Can be any JSON type.
   query = g.Emit({'name': "John Doe", 'age': 41, 'isActor': true})
-  emitResponse = client.Send(query)
+  response = client.Send(query)
 ```
 
 ##Bugs
