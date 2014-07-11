@@ -13,4 +13,9 @@ class CayleyClientTests(TestCase):
             .Out("name") \
             .All()
         response = client.Send(query)
-        self.assertTrue(len(response) > 0)
+
+        print response.result
+
+        self.assertTrue(response.r.status_code == 200)
+        self.assertTrue(response.r is not None)
+        self.assertTrue(len(response.result) > 0)

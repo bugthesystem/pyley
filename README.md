@@ -11,9 +11,11 @@ Python client for an open-source graph database [Cayley](https://github.com/goog
   client = CayleyClient("http://localhost:64210/api/v1/query/gremlin")
   g = GraphObject()
 
-  // Start with only one vertex, the literal name "Humphrey Bogart", and retreive all of them.
+  // Start with only one vertex, the literal name "Humphrey Bogart", and retrieve all of them.
   query=g.Vertex("Humphrey Bogart").All();
-  response = client.Send(query) #response contains JSON data
+  response = client.Send(query)
+  #response.result contains JSON data and response.r contains raw response
+  print response.result 
   
   # `g` and `V` are synonyms for `graph` and `Vertex` respectively, as they are quite common.
   query=g.V("Humphrey Bogart").All()
