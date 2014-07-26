@@ -89,6 +89,12 @@ class GremlinQueryTests(unittest.TestCase):
                                  ").Out('name')"
                                  ".All()")
 
+    def test_get_limit(self):
+        g = GraphObject()
+        query = g.Vertex().GetLimit(5)
+        actual = query.build()
+        self.assertEqual(actual, "g.V().GetLimit(5)")
+
 
 if __name__ == '__main__':
     unittest.main()
