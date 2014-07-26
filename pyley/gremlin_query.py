@@ -67,4 +67,4 @@ class GremlinQuery:
     def GetLimit(self, val):
         q = _QueryDefinition(".GetLimit(%d)", val)
         self.queryDeclarations.put(q)
-        return self
+        return self        
