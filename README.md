@@ -28,6 +28,9 @@ pyley
   
   g = GraphObject()
 
+  // Query all vertices in the graph, limit to the first 5 vertices found.
+  g.Vertex().GetLimit(5)
+  
   #Start with only one vertex, the literal name "Humphrey Bogart", and retrieve all of them.
   query=g.Vertex("Humphrey Bogart").All();
   response = client.Send(query)
