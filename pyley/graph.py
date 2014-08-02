@@ -36,4 +36,4 @@ class GraphObject():
         return self.M()
 
     def Emit(self, data):
-        return u"g.Emit({0:s})".format(json.dumps(data, default=lambda o: o.__dict__))
+        return "g.Emit({0:s})".format(json.dumps(data, default=lambda o: o.__dict__))
