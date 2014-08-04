@@ -15,8 +15,6 @@ __author__ = 'Ziya SARIKAYA @ziyasal'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014 Ziya SARIKAYA @ziyasal'
 
-VERSION = tuple(map(int, __version__.split('.')))
-
 
 class CayleyResponse(object):
     def __init__(self, raw_response, result):
