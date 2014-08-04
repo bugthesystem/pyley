@@ -4,6 +4,7 @@ setup(
     name='pyley',
     version='0.1.0',
     packages=['tests'],
+    scripts=['pyley.py'],
     url='https://github.com/ziyasal/pyley',
     license='LICENSE',
     author='ziyasal',
