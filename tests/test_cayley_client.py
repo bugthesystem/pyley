@@ -1,6 +1,5 @@
 from unittest import TestCase
-from pyley.cayley_client import CayleyClient
-from pyley.graph import GraphObject
+from pyley import CayleyClient, GraphObject
 
 
 class CayleyClientTests(TestCase):

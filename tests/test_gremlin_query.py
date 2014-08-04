@@ -1,5 +1,5 @@
 import unittest
-from pyley.graph import GraphObject
+from pyley import GraphObject
 
 
 class GremlinQueryTests(unittest.TestCase):
