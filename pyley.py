@@ -10,8 +10,7 @@ import json
 import requests
 
 __title__ = 'pyley'
-__version__ = '0.1.0'
-__build__ = 0x00002
+__version__ = '0.1.1-dev'
 __author__ = 'Ziya SARIKAYA @ziyasal'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014 Ziya SARIKAYA @ziyasal'
