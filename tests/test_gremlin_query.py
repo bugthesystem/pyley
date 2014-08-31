@@ -1,5 +1,5 @@
 import unittest
-from pyley.graph import GraphObject
+from pyley import GraphObject
 
 
 class GremlinQueryTests(unittest.TestCase):
@@ -93,7 +93,21 @@ class GremlinQueryTests(unittest.TestCase):
         g = GraphObject()
         query = g.Vertex().GetLimit(5)
         actual = query.build()
+        print actual
         self.assertEqual(actual, "g.V().GetLimit(5)")
+
+    def test_emit(self):
+        g = GraphObject()
+        query = g.Emit({'name': 'John', 'lastName': 'DOE', 'age': 25})
+        print query
+        self.assertEqual(query, 'g.Emit({"lastName": "DOE", "age": 25, "name": "John"})')
+
+    def test_both(self):
+        g = GraphObject()
+        query = g.V("F").Both("follows")
+        actual = query.build()
+        print actual
+        self.assertEqual(actual, "g.V('F').Both('follows')")
 
 
 if __name__ == '__main__':

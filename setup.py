@@ -2,8 +2,9 @@ from distutils.core import setup
 
 setup(
     name='pyley',
-    version='0.1.0',
-    packages=['pyley', 'tests'],
+    version='0.1.1-dev',
+    packages=['tests'],
+    scripts=['pyley.py'],
     url='https://github.com/ziyasal/pyley',
     license='LICENSE',
     author='ziyasal',
