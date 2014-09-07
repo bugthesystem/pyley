@@ -89,20 +89,47 @@ class _Path(_GremlinQuery):
         _GremlinQuery.__init__(self)
         self._put(parent)
 
-    def Out(self, label):
-        self._put("Out('%s')", label)
+    def Out(self, predicate=None, tags=None):
+        self._bounds("Out", predicate, tags)
 
         return self
 
-    def In(self, label):
-        self._put("In('%s')", label)
+    def In(self, predicate=None, tags=None):
+        self._bounds("In", predicate, tags)
 
         return self
 
-    def Both(self, val):
-        self._put("Both('%s')", val)
+    def Both(self, predicate=None, tags=None):
+        self._bounds("Both", predicate, tags)
 
         return self
+
+    def _bounds(self, method, predicate=None, tags=None):
+        if predicate is None and tags is None:
+            self._put("%s()", method)
+        elif tags is None:
+            self._put("%s(%s)", method, self._format_input_bounds(predicate))
+        else:
+            self._put(
+                "%s(%s, %s)",
+                method,
+                self._format_input_bounds(predicate),
+                self._format_input_bounds(tags)
+            )
+
+        return self
+
+    def _format_input_bounds(self, value):
+        if type(value) is dict:
+            return json.dumps(value)
+
+        if type(value) is str:
+            return "'%s'" % value
+
+        if value is None:
+            return 'null'
+
+        return value
 
     def Is(self, *nodes):
         self._put("Is('%s')", "', '".join(nodes))

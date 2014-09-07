@@ -29,6 +29,27 @@ class GremlinQueryTests(unittest.TestCase):
         print actual
         self.assertEqual(actual, "g.V().Out('name')")
 
+    def test_out_query_with_predicate(self):
+        g = GraphObject()
+        query = g.V().Out(g.Vertex())
+        actual = query.build()
+
+        self.assertEqual(actual, "g.V().Out(g.V())")
+
+    def test_out_query_with_predicate_as_dict_and_label(self):
+        g = GraphObject()
+        query = g.V().Out(['foo', 'bar'], 'qux')
+        actual = query.build()
+
+        self.assertEqual(actual, "g.V().Out(['foo', 'bar'], 'qux')")
+
+    def test_out_query_with_predicate_as_none_and_label_as_dict(self):
+        g = GraphObject()
+        query = g.V().Out(None, ['foo', 'bar'])
+        actual = query.build()
+
+        self.assertEqual(actual, "g.V().Out(null, ['foo', 'bar'])")
+
     def test_in_query(self):
         g = GraphObject()
         query = g.V().In("name").All()
