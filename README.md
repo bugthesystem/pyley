@@ -11,7 +11,7 @@
     \/_/                 \/_/\_______\/    \/__________/        \/_/
 
 
-pyley
+pyley [![Build Status](https://travis-ci.org/ziyasal/pyley.png?branch=master)](https://travis-ci.org/ziyasal/pyley)
 =====
 
 [Python](https://www.python.org/) client for an open-source graph database [**Cayley**](https://github.com/google/cayley)
