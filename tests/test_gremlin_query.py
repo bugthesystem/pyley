@@ -26,7 +26,7 @@ class GremlinQueryTests(unittest.TestCase):
         g = GraphObject()
         query = g.V().Out('name')
         actual = query.build()
-        print actual
+        
         self.assertEqual(actual, "g.V().Out('name')")
 
     def test_out_query_with_predicate(self):
@@ -54,7 +54,7 @@ class GremlinQueryTests(unittest.TestCase):
         g = GraphObject()
         query = g.V().In("name").All()
         actual = query.build()
-        print actual
+        
         self.assertEqual(actual, "g.V().In('name').All()")
 
     def test_both(self):
@@ -96,14 +96,14 @@ class GremlinQueryTests(unittest.TestCase):
         g = GraphObject()
         query = g.V("Humphrey Bogart").All()
         actual = query.build()
-        print actual
+        
         self.assertEqual(actual, "g.V('Humphrey Bogart').All()")
 
     def test_has_query(self):
         g = GraphObject()
         query = g.V().Has("name", "Casablanca").All()
         actual = query.build()
-        print actual
+        
         self.assertEqual(actual, "g.V().Has('name', 'Casablanca').All()")
 
     def test_complex_query1(self):
@@ -114,7 +114,7 @@ class GremlinQueryTests(unittest.TestCase):
             .Out("name") \
             .All()
         actual = query.build()
-        print actual
+        
         self.assertEqual(actual, "g.V().Has('name', 'Casablanca')"
                                  ".Out('/film/film/starring')"
                                  ".Out('/film/performance/actor')"
@@ -126,7 +126,7 @@ class GremlinQueryTests(unittest.TestCase):
         film_to_actor = g.Morphism().Out("/film/film/starring").Out("/film/performance/actor")
         query = g.V().Has("name", "Casablanca").Follow(film_to_actor).Out("name").All()
         actual = query.build()
-        print actual
+        
         self.assertEqual(actual, "g.V().Has('name', 'Casablanca')"
                                  ".Follow("
                                  "g.Morphism().Out('/film/film/starring').Out('/film/performance/actor')"
@@ -138,7 +138,7 @@ class GremlinQueryTests(unittest.TestCase):
         film_to_actor = g.Morphism().Out("/film/film/starring").Out("/film/performance/actor")
         query = g.V().Has("name", "Casablanca").Follow(film_to_actor.build()).Out("name").All()
         actual = query.build()
-        print actual
+        
         self.assertEqual(actual, "g.V().Has('name', 'Casablanca')"
                                  ".Follow("
                                  "g.Morphism().Out('/film/film/starring').Out('/film/performance/actor')"
@@ -171,13 +171,13 @@ class GremlinQueryTests(unittest.TestCase):
         g = GraphObject()
         query = g.Vertex().GetLimit(5)
         actual = query.build()
-        print actual
+        
         self.assertEqual(actual, "g.V().GetLimit(5)")
 
     def test_emit(self):
         g = GraphObject()
         query = g.Emit({'name': 'John', 'lastName': 'DOE', 'age': 25})
-        print query
+        
         self.assertEqual(query, 'g.Emit({"lastName": "DOE", "age": 25, "name": "John"})')
 
 
