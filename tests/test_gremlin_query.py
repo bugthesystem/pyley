@@ -89,6 +89,28 @@ class GremlinQueryTests(unittest.TestCase):
                                  ").Out('name')"
                                  ".All()")
 
+    def test_follow_with_vertex(self):
+        g = GraphObject()
+
+        with self.assertRaises(Exception):
+            g.V().Follow(g.V()).build()
+
+    def test_union(self):
+        g = GraphObject()
+
+        query = g.Vertex().Union(g.Vertex())
+        actual = query.build()
+
+        self.assertEqual(actual, "g.V().Union(g.V())")
+
+    def test_intersect(self):
+        g = GraphObject()
+
+        query = g.Vertex().Intersect(g.Vertex())
+        actual = query.build()
+
+        self.assertEqual(actual, "g.V().Intersect(g.V())")
+
     def test_get_limit(self):
         g = GraphObject()
         query = g.Vertex().GetLimit(5)

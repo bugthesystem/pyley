@@ -5,7 +5,6 @@ pyley Python client for an open-source graph database Cayley
 :license: MIT, see LICENSE for more details.
 
 """
-import Queue
 import json
 import requests
 
@@ -31,18 +30,29 @@ class CayleyClient(object):
             r = requests.post(self.url, data=query)
             return CayleyResponse(r, r.json())
         elif isinstance(query, _GremlinQuery):
-            r = requests.post(self.url, data=query.build())
+            r = requests.post(self.url, data=str(query))
             return CayleyResponse(r, r.json())
         else:
             raise Exception("Invalid query parameter in Send")
 
 
-class GraphObject(object):
-    def __init__(self):
-        pass
+class _GremlinQuery(object):
+    queryDeclarations = None
 
+    def __init__(self):
+        self.queryDeclarations = []
+
+    def __str__(self):
+        return ".".join([str(d) for d in self.queryDeclarations])
+
+    def _put(self, token, *parameters):
+        q = _QueryDefinition(token, *parameters)
+        self.queryDeclarations.append(q)
+
+
+class GraphObject(object):
     def V(self):
-        return _GremlinQuery("g.V()")
+        return _Vertex("g.V()")
 
     def V(self, *node_ids):
         builder = []
@@ -53,10 +63,10 @@ class GraphObject(object):
             else:
                 builder.append(u"'{0:s}',".format(node_id))
 
-        return _GremlinQuery(u"g.V({0:s})".format("".join(builder)))
+        return _Vertex(u"g.V({0:s})".format("".join(builder)))
 
     def M(self):
-        return _GremlinQuery("g.Morphism()")
+        return _Morphism("g.Morphism()")
 
     def Vertex(self):
         return self.V()
@@ -74,76 +84,90 @@ class GraphObject(object):
         return "g.Emit({0:s})".format(json.dumps(data, default=lambda o: o.__dict__))
 
 
+class _Path(_GremlinQuery):
+    def __init__(self, parent):
+        _GremlinQuery.__init__(self)
+        self._put(parent)
+
+    def Out(self, label):
+        self._put("Out('%s')", label)
+
+        return self
+
+    def In(self, label):
+        self._put("In('%s')", label)
+
+        return self
+
+    def Both(self, val):
+        self._put("Both('%s')", val)
+
+        return self
+
+    def Has(self, label, val):
+        self._put("Has('%s','%s')", label, val)
+
+        return self
+
+    def Intersect(self, query):
+        if not isinstance(query, _Vertex) and type(query) is not str:
+            raise Exception("Invalid parameter in intersect query")
+
+        self._put("Intersect(%s)", query)
+
+        return self
+
+    def Union(self, query):
+        if not isinstance(query, _Vertex) and type(query) is not str:
+            raise Exception("Invalid parameter in union query")
+
+        self._put("Union(%s)", query)
+
+        return self
+
+    def Follow(self, query):
+        if not isinstance(query, _Morphism) and type(query) is not str:
+            raise Exception("Invalid parameter in follow query")
+
+        self._put("Follow(%s)", query)
+
+        return self
+
+    def FollowR(self, query):
+        if not isinstance(query, _Morphism) and type(query) is not str:
+            raise Exception("Invalid parameter in followr query")
+
+        self._put("FollowR(%s)", query)
+
+        return self
+
+    def build(self):
+        return str(self)
+
+
+class _Vertex(_Path):
+    def All(self):
+        self._put("All()")
+
+        return self
+
+    def GetLimit(self, limit):
+        self._put("GetLimit(%d)", limit)
+
+        return self
+
+
+class _Morphism(_Path):
+    pass
+
+
 class _QueryDefinition(object):
     def __init__(self, token, *parameters):
         self.token = token
         self.parameters = parameters
 
-    def build(self):
+    def __str__(self):
         if len(self.parameters) > 0:
-            return self.token % self.parameters
+            return str(self.token) % self.parameters
         else:
-            return self.token
-
-
-class _GremlinQuery(object):
-    def __init__(self, token, *parameters):
-        self.queryDeclarations = Queue.Queue()
-        q = _QueryDefinition(token, parameters) if len(parameters) > 0 else _QueryDefinition(token)
-        self.queryDeclarations.put(q)
-
-    def build(self):
-        builder = []
-        while not self.queryDeclarations.empty():
-            query_def = self.queryDeclarations.get()
-            builder.append(query_def.build())
-
-        return "".join(builder)
-
-    def Out(self, label):
-        q = _QueryDefinition(".Out('%s')", label)
-        self.queryDeclarations.put(q)
-
-        return self
-
-    def All(self):
-        q = _QueryDefinition(".All()")
-        self.queryDeclarations.put(q)
-
-        return self
-
-    def In(self, label):
-        q = _QueryDefinition(".In('%s')", label)
-        self.queryDeclarations.put(q)
-
-        return self
-
-    def Has(self, label, val):
-        q = _QueryDefinition(".Has('%s','%s')", label, val)
-        self.queryDeclarations.put(q)
-
-        return self
-
-    def Follow(self, query):
-        if isinstance(query, str):
-            q = _QueryDefinition(".Follow(%s)", query)
-        elif isinstance(query, _GremlinQuery):
-            q = _QueryDefinition(".Follow(%s)", query.build())
-        else:
-            raise Exception("Invalid parameter in follow query")
-
-        self.queryDeclarations.put(q)
-
-        return self
-
-    def GetLimit(self, val):
-        q = _QueryDefinition(".GetLimit(%d)", val)
-        self.queryDeclarations.put(q)
-
-        return self
-
-    def Both(self, val):
-        q = _QueryDefinition(".Both('%s')", val)
-        self.queryDeclarations.put(q)
-
-        return self
+            return str(self.token)
