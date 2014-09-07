@@ -9,5 +9,6 @@ before_script:
   - /bin/bash ./.travis.sh
   - sudo pip install .
   - sudo pip install pytest
+  - sudo pip install requests
 
 script: py.test
