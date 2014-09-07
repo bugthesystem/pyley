@@ -52,7 +52,7 @@ class _GremlinQuery(object):
 
 class GraphObject(object):
     def V(self):
-        return _Path("g.V()")
+        return _Vertex("g.V()")
 
     def V(self, *node_ids):
         builder = []
@@ -63,10 +63,10 @@ class GraphObject(object):
             else:
                 builder.append(u"'{0:s}',".format(node_id))
 
-        return _Path(u"g.V({0:s})".format("".join(builder)))
+        return _Vertex(u"g.V({0:s})".format("".join(builder)))
 
     def M(self):
-        return _Path("g.Morphism()")
+        return _Morphism("g.Morphism()")
 
     def Vertex(self):
         return self.V()
@@ -94,33 +94,8 @@ class _Path(_GremlinQuery):
 
         return self
 
-    def All(self):
-        self._put("All()")
-
-        return self
-
     def In(self, label):
         self._put("In('%s')", label)
-
-        return self
-
-    def Has(self, label, val):
-        self._put("Has('%s','%s')", label, val)
-
-        return self
-
-    def Follow(self, query):
-        if isinstance(query, str):
-            self._put("Follow(%s)", query)
-        elif isinstance(query, _GremlinQuery):
-            self._put("Follow(%s)", query.build())
-        else:
-            raise Exception("Invalid parameter in follow query")
-
-        return self
-
-    def GetLimit(self, val):
-        self._put("GetLimit(%d)", val)
 
         return self
 
@@ -129,8 +104,61 @@ class _Path(_GremlinQuery):
 
         return self
 
+    def Has(self, label, val):
+        self._put("Has('%s','%s')", label, val)
+
+        return self
+
+    def Intersect(self, query):
+        if not isinstance(query, _Vertex) and type(query) is not str:
+            raise Exception("Invalid parameter in intersect query")
+
+        self._put("Intersect(%s)", query)
+
+        return self
+
+    def Union(self, query):
+        if not isinstance(query, _Vertex) and type(query) is not str:
+            raise Exception("Invalid parameter in union query")
+
+        self._put("Union(%s)", query)
+
+        return self
+
+    def Follow(self, query):
+        if not isinstance(query, _Morphism) and type(query) is not str:
+            raise Exception("Invalid parameter in follow query")
+
+        self._put("Follow(%s)", query)
+
+        return self
+
+    def FollowR(self, query):
+        if not isinstance(query, _Morphism) and type(query) is not str:
+            raise Exception("Invalid parameter in followr query")
+
+        self._put("FollowR(%s)", query)
+
+        return self
+
     def build(self):
         return str(self)
+
+
+class _Vertex(_Path):
+    def All(self):
+        self._put("All()")
+
+        return self
+
+    def GetLimit(self, limit):
+        self._put("GetLimit(%d)", limit)
+
+        return self
+
+
+class _Morphism(_Path):
+    pass
 
 
 class _QueryDefinition(object):
