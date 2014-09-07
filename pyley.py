@@ -104,8 +104,28 @@ class _Path(_GremlinQuery):
 
         return self
 
-    def Has(self, label, val):
-        self._put("Has('%s','%s')", label, val)
+    def Is(self, *nodes):
+        self._put("Is('%s')", "', '".join(nodes))
+
+        return self
+
+    def Has(self, predicate, object):
+        self._put("Has('%s', '%s')", predicate, object)
+
+        return self
+
+    def Tag(self, *tags):
+        self._put("Tag(%s)", json.dumps(tags))
+
+        return self
+
+    def Back(self, tag):
+        self._put("Back('%s')", tag)
+
+        return self
+
+    def Save(self, predicate, tag):
+        self._put("Save('%s', '%s')", predicate, tag)
 
         return self
 

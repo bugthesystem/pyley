@@ -29,13 +29,6 @@ class GremlinQueryTests(unittest.TestCase):
         print actual
         self.assertEqual(actual, "g.V().Out('name')")
 
-    def test_all_query(self):
-        g = GraphObject()
-        query = g.V("Humphrey Bogart").All()
-        actual = query.build()
-        print actual
-        self.assertEqual(actual, "g.V('Humphrey Bogart').All()")
-
     def test_in_query(self):
         g = GraphObject()
         query = g.V().In("name").All()
@@ -43,12 +36,54 @@ class GremlinQueryTests(unittest.TestCase):
         print actual
         self.assertEqual(actual, "g.V().In('name').All()")
 
+    def test_both(self):
+        g = GraphObject()
+        query = g.V("F").Both("follows")
+        actual = query.build()
+        print actual
+        self.assertEqual(actual, "g.V('F').Both('follows')")
+
+    def test_is(self):
+        g = GraphObject()
+        query = g.V().Is('B', 'C')
+        actual = query.build()
+
+        self.assertEqual(actual, "g.V().Is('B', 'C')")
+
+    def test_tag(self):
+        g = GraphObject()
+        query = g.V().Tag('B', 'C')
+        actual = query.build()
+
+        self.assertEqual(actual, 'g.V().Tag(["B", "C"])')
+
+    def test_save(self):
+        g = GraphObject()
+        query = g.V().Save('B', 'C')
+        actual = query.build()
+
+        self.assertEqual(actual, "g.V().Save('B', 'C')")
+
+    def test_back(self):
+        g = GraphObject()
+        query = g.V().Back('B')
+        actual = query.build()
+
+        self.assertEqual(actual, "g.V().Back('B')")
+
+    def test_all_query(self):
+        g = GraphObject()
+        query = g.V("Humphrey Bogart").All()
+        actual = query.build()
+        print actual
+        self.assertEqual(actual, "g.V('Humphrey Bogart').All()")
+
     def test_has_query(self):
         g = GraphObject()
         query = g.V().Has("name", "Casablanca").All()
         actual = query.build()
         print actual
-        self.assertEqual(actual, "g.V().Has('name','Casablanca').All()")
+        self.assertEqual(actual, "g.V().Has('name', 'Casablanca').All()")
 
     def test_complex_query1(self):
         g = GraphObject()
@@ -59,7 +94,7 @@ class GremlinQueryTests(unittest.TestCase):
             .All()
         actual = query.build()
         print actual
-        self.assertEqual(actual, "g.V().Has('name','Casablanca')"
+        self.assertEqual(actual, "g.V().Has('name', 'Casablanca')"
                                  ".Out('/film/film/starring')"
                                  ".Out('/film/performance/actor')"
                                  ".Out('name')"
@@ -71,7 +106,7 @@ class GremlinQueryTests(unittest.TestCase):
         query = g.V().Has("name", "Casablanca").Follow(film_to_actor).Out("name").All()
         actual = query.build()
         print actual
-        self.assertEqual(actual, "g.V().Has('name','Casablanca')"
+        self.assertEqual(actual, "g.V().Has('name', 'Casablanca')"
                                  ".Follow("
                                  "g.Morphism().Out('/film/film/starring').Out('/film/performance/actor')"
                                  ").Out('name')"
@@ -83,7 +118,7 @@ class GremlinQueryTests(unittest.TestCase):
         query = g.V().Has("name", "Casablanca").Follow(film_to_actor.build()).Out("name").All()
         actual = query.build()
         print actual
-        self.assertEqual(actual, "g.V().Has('name','Casablanca')"
+        self.assertEqual(actual, "g.V().Has('name', 'Casablanca')"
                                  ".Follow("
                                  "g.Morphism().Out('/film/film/starring').Out('/film/performance/actor')"
                                  ").Out('name')"
@@ -123,13 +158,6 @@ class GremlinQueryTests(unittest.TestCase):
         query = g.Emit({'name': 'John', 'lastName': 'DOE', 'age': 25})
         print query
         self.assertEqual(query, 'g.Emit({"lastName": "DOE", "age": 25, "name": "John"})')
-
-    def test_both(self):
-        g = GraphObject()
-        query = g.V("F").Both("follows")
-        actual = query.build()
-        print actual
-        self.assertEqual(actual, "g.V('F').Both('follows')")
 
 
 if __name__ == '__main__':
