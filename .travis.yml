@@ -1,0 +1,13 @@
+anguage: python
+
+python:
+  - 2.7
+  - 3.3
+  - 3.4
+
+before_script:
+  - /bin/bash ./.travis.sh
+  - sudo pip install .
+  - sudo pip install pytest
+
+script: py.test
