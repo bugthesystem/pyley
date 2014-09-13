@@ -8,8 +8,9 @@ python:
 # command to install dependencies
 before_script:
   - /bin/bash ./.travis.sh
-  - sudo pip install .
-  - sudo pip install pytest
-  - sudo pip install requests
+install:
+  - "pip install ."
+  - "pip install pytest"
+  - "pip install requests"
 
 script: py.test
