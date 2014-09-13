@@ -3,6 +3,7 @@ from pyley import CayleyClient, GraphObject
 
 
 class CayleyClientTests(TestCase):
+    @unittest.skip('Disabled')
     def test_send(self):
         client = CayleyClient()
         g = GraphObject()
