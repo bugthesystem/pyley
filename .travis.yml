@@ -10,7 +10,8 @@ before_script:
   
 install:
   - "pip install ."
-  - "pip install pytest"
+  - "pip install unittest"
   - "pip install requests"
 
-script: py.test
+script:
+  - python -m unittest discover pyley 'test_*.py'
