@@ -10,7 +10,6 @@ before_script:
   
 install:
   - "pip install ."
-  - "pip install unittest"
   - "pip install requests"
 
 script:
