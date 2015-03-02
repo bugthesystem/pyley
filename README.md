@@ -8,6 +8,12 @@ pyley [![Build Status](https://travis-ci.org/ziyasal/pyley.png?branch=master)](h
 
 > Cayley is an open-source graph inspired by the graph database behind [Freebase](http://freebase.com/) and Google's [Knowledge Graph](http://www.google.com/insidesearch/features/search/knowledge.html). Its goal is to be a part of the developer's toolbox where [Linked Data](http://linkeddata.org/) and graph-shaped data (semantic webs, social networks, etc) in general are concerned.
 
+**Install via pip**
+
+```
+pip install pyley
+```
+
 ##Sample
 
 ```python
