@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='pyley',
-    version='0.1.1-dev',
+    version='0.1.2',
     packages=['tests'],
     scripts=['pyley.py'],
     url='https://github.com/ziyasal/pyley',
