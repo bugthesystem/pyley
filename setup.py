@@ -4,11 +4,10 @@ from setuptools import setup
 
 setup(
     name='pyley',
-    version='0.1.2',
+    version='0.2.0',
     author='Ziya SARIKAYA',
     author_email='sarikayaziya@gmail.com',
-    packages=[],
-    scripts=['pyley.py'],
+    packages=['pyley'],
     url='https://github.com/ziyasal/pyley',
     license='LICENSE',
     description='Python client for an open-source graph database Cayley',
