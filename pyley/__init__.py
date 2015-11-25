@@ -75,7 +75,7 @@ class GraphObject(object):
         if len(node_ids) == 0:
             return self.V()
 
-        return self.V(node_ids)
+        return self.V(*node_ids)
 
     def Morphism(self):
         return self.M()
