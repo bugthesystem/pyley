@@ -1,7 +1,7 @@
 ![](https://github.com/ziyasal/pyley/raw/master/pyley.png?raw=true)
 
 
-pyley [![Build Status](https://travis-ci.org/ziyasal/pyley.png?branch=master)](https://travis-ci.org/ziyasal/pyley)
+pyley [![Build Status](https://travis-ci.org/ziyasal/pyley.png?branch=master)](https://travis-ci.org/ziyasal/pyley) [![Coverage Status](https://coveralls.io/repos/ziyasal/pyley/badge.svg?branch=master&service=github)](https://coveralls.io/github/ziyasal/pyley?branch=master)
 =====
 
 [Python](https://www.python.org/) client for an open-source graph database [**Cayley**](https://github.com/google/cayley)
