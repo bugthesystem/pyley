@@ -14,5 +14,5 @@ install:
   - "pip install nose"
 
 script:
-  - nosetests -w /tests --with-coverage
+  - nosetests --with-coverage --cover-package=pyley
 after_success: coveralls
