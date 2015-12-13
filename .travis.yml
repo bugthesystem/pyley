@@ -9,6 +9,9 @@ before_script:
 install:
   - "pip install ."
   - "pip install requests"
+  - "pip install pytest pytest-cov"
+  - "pip install coveralls"
 
 script:
-  - python -m unittest discover pyley 'test_*.py'
+  - py.test
+after_success: coveralls
