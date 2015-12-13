@@ -14,5 +14,5 @@ install:
   - "pip install nose"
 
 script:
-  - nosetests --with-coverage
+  - nosetests -w /tests --with-coverage
 after_success: coveralls
