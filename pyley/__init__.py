@@ -23,7 +23,7 @@ class CayleyResponse(object):
 
 class CayleyClient(object):
     def __init__(self, url="http://localhost:64210", version="v1"):
-        self.url = "%s/api/%s/query/gremlin" % (url, version)
+        self.url = "%s/api/%s/query/gizmo" % (url, version)
 
     def Send(self, query):
         if isinstance(query, str):
