@@ -8,13 +8,13 @@ pyley [![Build Status](https://travis-ci.org/ziyasal/pyley.png?branch=master)](h
 
 > Cayley is an open-source graph inspired by the graph database behind [Freebase](http://freebase.com/) and Google's [Knowledge Graph](http://www.google.com/insidesearch/features/search/knowledge.html). Its goal is to be a part of the developer's toolbox where [Linked Data](http://linkeddata.org/) and graph-shaped data (semantic webs, social networks, etc) in general are concerned.  
 
-**Install via pip**
+### Install via pip
 
 ```
 pip install pyley
 ```
 
-##Sample
+### Sample
 
 ```python
   #Create cayley client
@@ -74,17 +74,17 @@ pip install pyley
   response = client.Send(query)
 ```
 
-##Bugs
+### Bugs
 If you encounter a bug, performance issue, or malfunction, please add an [Issue](https://github.com/ziyasal/pyley/issues) with steps on how to reproduce the problem.
 
-##TODO
+### TODO
 - Improve Gremlin implementation (Basic steps implemented at the moment)
 - Add more tests
 - Add more documentation
 
-##Open Source  Projects in Use
+### Open Source  Projects in Use
 - [requests](https://github.com/kennethreitz/requests) by @kennethreitz
 
-##License
+## License
 
 Code and documentation are available according to the *MIT* License (see [LICENSE](https://github.com/ziyasal/pyley/blob/master/LICENSE)).
