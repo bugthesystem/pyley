@@ -24,6 +24,8 @@ class CayleyResponse(object):
 class CayleyClient(object):
     def __init__(self, url="http://localhost:64210", version="v1"):
         self.url = "%s/api/%s/query/gizmo" % (url, version)
+        self.write_url = "%s/api/%s/write" % (url, version)
+        self.delete_url = "%s/api/%s/delete" % (url, version)
 
     def Send(self, query):
         if isinstance(query, str):
@@ -34,6 +36,38 @@ class CayleyClient(object):
             return CayleyResponse(r, r.json())
         else:
             raise Exception("Invalid query parameter in Send")
+
+    def AddQuad(self, subject, predicate, object_, label=None):
+        return self.AddQuads([(subject, predicate, object_, label)])
+
+    def AddQuads(self, quads):
+        quads = [
+            {
+                "subject": q[0],
+                "predicate": q[1],
+                "object": q[2],
+                "label": None if len(q) < 4 else q[3]
+            }
+            for q in quads
+        ]
+        r = requests.post(self.write_url, json=quads)
+        return CayleyResponse(r, r.json())
+
+    def DeleteQuad(self, subject, predicate, object_, label=None):
+        return self.DeleteQuads([(subject, predicate, object_, label)])
+
+    def DeleteQuads(self, quads):
+        quads = [
+            {
+                "subject": q[0],
+                "predicate": q[1],
+                "object": q[2],
+                "label": None if len(q) < 4 else q[3]
+            }
+            for q in quads
+        ]
+        r = requests.post(self.delete_url, json=quads)
+        return CayleyResponse(r, r.json())
 
 
 class _GremlinQuery(object):
