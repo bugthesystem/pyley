@@ -18,7 +18,7 @@ pip install pyley
 
 ```python
   #Create cayley client
-  client = CayleyClient() # this creates client with default parameters `http://localhost:64210/api/v1/query/gremlin`
+  client = CayleyClient() # this creates client with default parameters `http://localhost:64210/api/v1/query/gizmo`
   #or  specify `url` and `version` parameters
   client = CayleyClient("http://localhost:64210","v1")
   
@@ -78,7 +78,7 @@ pip install pyley
 If you encounter a bug, performance issue, or malfunction, please add an [Issue](https://github.com/ziyasal/pyley/issues) with steps on how to reproduce the problem.
 
 ### TODO
-- Improve Gremlin implementation (Basic steps implemented at the moment)
+- Improve Gizmo implementation (Basic steps implemented at the moment)
 - Add more tests
 - Add more documentation
 

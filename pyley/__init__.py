@@ -31,7 +31,7 @@ class CayleyClient(object):
         if isinstance(query, str):
             r = requests.post(self.url, data=query)
             return CayleyResponse(r, r.json())
-        elif isinstance(query, _GremlinQuery):
+        elif isinstance(query, _GizmoQuery):
             r = requests.post(self.url, data=str(query))
             return CayleyResponse(r, r.json())
         else:
@@ -70,7 +70,7 @@ class CayleyClient(object):
         return CayleyResponse(r, r.json())
 
 
-class _GremlinQuery(object):
+class _GizmoQuery(object):
     queryDeclarations = None
 
     def __init__(self):
@@ -118,9 +118,9 @@ class GraphObject(object):
         return "g.Emit({0:s})".format(json.dumps(data, default=lambda o: o.__dict__))
 
 
-class _Path(_GremlinQuery):
+class _Path(_GizmoQuery):
     def __init__(self, parent):
-        _GremlinQuery.__init__(self)
+        _GizmoQuery.__init__(self)
         self._put(parent)
 
     def Out(self, predicate=None, tags=None):

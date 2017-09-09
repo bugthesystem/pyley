@@ -2,9 +2,9 @@ import unittest
 from pyley import GraphObject
 
 
-class GremlinQueryTests(unittest.TestCase):
+class GizmoQueryTests(unittest.TestCase):
     def setUp(self):
-        self.opts = dict(url='http://localhost:64210/api/v1/query/gremlin')
+        self.opts = dict(url='http://localhost:64210/api/v1/query/gizmo')
 
     def test_vertex_query(self):
         g = GraphObject()
