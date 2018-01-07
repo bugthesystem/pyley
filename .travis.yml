@@ -7,12 +7,12 @@ before_script:
   - /bin/bash ./.travis.sh
   
 install:
-  - "pip install ."
-  - "pip install requests"
-  - "pip install python-coveralls"
-  - "pip install coverage"
-  - "pip install nose"
+  - pip install -r requirements.txt
+  - pip install -r requirements.testing.txt
+  - pip install .
 
 script:
   - nosetests --with-coverage --cover-package=pyley
-after_success: coveralls
+
+after_success:
+  - coveralls
