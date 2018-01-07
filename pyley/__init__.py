@@ -1,19 +1,16 @@
-"""
-pyley Python client for an open-source graph database Cayley
+"""pyley Python client for an open-source graph database Cayley"""
 
-:copyright: (c) 2014 by Ziya SARIKAYA @ziyasal.
-:license: MIT, see LICENSE for more details.
-
-"""
 import json
 import requests
 
 __title__ = 'pyley'
-__version__ = '0.1.1-dev'
+__version__ = '0.2.1'
 __author__ = 'Ziya SARIKAYA @ziyasal'
-__license__ = 'MIT'
+__license__ = 'MIT License'
 __copyright__ = 'Copyright 2014 Ziya SARIKAYA @ziyasal'
-
+__url__          = 'https://github.com/ziyasal/pyley'
+__download_url__ = 'https://pypi.python.org/pypi/pyley'
+__description__  = 'Python client for an open-source graph database Cayley'
 
 class CayleyResponse(object):
     def __init__(self, raw_response, result):
