@@ -101,7 +101,7 @@ class GraphObject(object):
         return self.M()
 
     def Emit(self, data):
-        return "g.Emit({0:s})".format(json.dumps(data, default=lambda o: o.__dict__))
+        return "g.Emit({0:s})".format(json.dumps(data, default=lambda o: o.__dict__, sort_keys=True))
 
 
 class _Path(_GizmoQuery):

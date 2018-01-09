@@ -178,7 +178,7 @@ class GizmoQueryTests(unittest.TestCase):
         g = GraphObject()
         query = g.Emit({'name': 'John', 'lastName': 'DOE', 'age': 25})
         
-        self.assertEqual(query, 'g.Emit({"lastName": "DOE", "age": 25, "name": "John"})')
+        self.assertEqual(query, 'g.Emit({"age": 25, "lastName": "DOE", "name": "John"})')
 
 
 if __name__ == '__main__':
