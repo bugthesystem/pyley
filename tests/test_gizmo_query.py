@@ -61,7 +61,7 @@ class GizmoQueryTests(unittest.TestCase):
         g = GraphObject()
         query = g.V("F").Both("follows")
         actual = query.build()
-        print actual
+        print(actual)
         self.assertEqual(actual, "g.V('F').Both('follows')")
 
     def test_is(self):
