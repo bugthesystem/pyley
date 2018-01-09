@@ -87,4 +87,6 @@ If you encounter a bug, performance issue, or malfunction, please add an [Issue]
 
 ## License
 
+@ziλasal & @abdullahselek
+
 Code and documentation are available according to the *MIT* License (see [LICENSE](https://github.com/ziyasal/pyley/blob/master/LICENSE)).
