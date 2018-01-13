@@ -1,0 +1,48 @@
+environment:
+
+  matrix:
+
+    - PYTHON: "C:\\Python27"
+    - PYTHON: "C:\\Python34"
+    - PYTHON: "C:\\Python35"
+    - PYTHON: "C:\\Python27-x64"
+      DISTUTILS_USE_SDK: "1"
+    - PYTHON: "C:\\Python34-x64"
+      DISTUTILS_USE_SDK: "1"
+    - PYTHON: "C:\\Python35-x64"
+    - PYTHON: "C:\\Python36-x64"
+      DIR_CAYLEY: C:\cayley
+
+cache:
+  - '%DIR_CAYLEY% -> appveyor.yml'
+
+install:
+  - set PATH=%PYTHON%;%PYTHON%\Scripts;C:\OpenSSL-Win64;%DIR_CAYLEY%;%SystemRoot%\system32;%PATH%
+  - if not exist %DIR_CAYLEY% (
+      appveyor DownloadFile https://github.com/cayleygraph/cayley/releases/download/v0.7.0/cayley_0.7.0_windows_amd64.zip &&
+      7z x cayley_0.7.0_windows_amd64.zip -y -aoa -oC:\ > NULs
+    )
+  # - appveyor DownloadFile https://github.com/cayleygraph/cayley/releases/download/v0.7.0/cayley_0.7.0_windows_amd64.zip -Timeout 5000
+  # - 7z x cayley_0.7.0_windows_amd64.zip cayley_0.7.0_windows_amd64
+  # - cd cayley_0.7.0_windows_amd64
+  - ps: $CayleyProcess = Start-Process "cayley http --dbpath=30kmoviedata.nq.gz" -PassThru
+  # We need wheel installed to build wheels
+  - "%PYTHON%\\python.exe -m pip install wheel"
+  - "%PYTHON%\\python.exe -m pip install -r requirements.txt"
+  - "%PYTHON%\\python.exe -m pip install -r requirements.testing.txt"
+
+build: off
+
+test_script:
+  - "%PYTHON%\\python.exe -m nose --with-coverage --cover-package=pyley"
+
+after_test:
+  # This step builds your wheels.
+  - "%PYTHON%\\python.exe setup.py bdist_wheel"
+
+artifacts:
+  # bdist_wheel puts your built wheel in the dist directory
+  - path: dist\*
+
+on_finish:
+  - ps: Stop-Process -Id $CayleyProcess.Id
