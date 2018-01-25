@@ -15,10 +15,10 @@ class CayleyClient(object):
 
     def Send(self, query):
         if isinstance(query, str):
-            r = requests.post(self.url, data=query)
+            r = requests.post(self.url, data=query.encode('utf-8'))
             return CayleyResponse(r, r.json())
         elif isinstance(query, _GizmoQuery):
-            r = requests.post(self.url, data=str(query))
+            r = requests.post(self.url, data=str(query).encode('utf-8'))
             return CayleyResponse(r, r.json())
         else:
             raise Exception("Invalid query parameter in Send")
