@@ -17,6 +17,9 @@ pip install pyley
 ### Sample
 
 ```python
+
+  import pyley
+
   #Create cayley client
   client = CayleyClient() # this creates client with default parameters `http://localhost:64210/api/v1/query/gizmo`
   #or  specify `url` and `version` parameters
@@ -70,7 +73,7 @@ pip install pyley
   response = client.Send(query)
 
   #Add data programatically to the JSON result list. Can be any JSON type.
-  query = g.Emit({'name': "John Doe", 'age': 41, 'isActor': true})
+  query = g.Emit({'name': "John Doe", 'age': 41, 'isActor': True})
   response = client.Send(query)
 ```
 
