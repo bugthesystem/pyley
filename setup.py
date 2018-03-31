@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name='pyley',
-    version='0.2.0',
+    version='0.2.2',
     author='Ziya SARIKAYA',
     author_email='sarikayaziya@gmail.com',
     packages=['pyley'],
