@@ -19,6 +19,17 @@ class CayleyClientTests(TestCase):
         self.assertTrue(response.r is not None)
         self.assertTrue(len(response.result) > 0)
 
+        query = g.V().HasR("name", "Casablanca") \
+            .Out("/film/film/starring") \
+            .Out("/film/performance/actor") \
+            .Out("name") \
+            .All()
+        response = client.Send(query)
+
+        self.assertTrue(response.r.status_code == 200)
+        self.assertTrue(response.r is not None)
+        self.assertTrue(len(response.result) > 0)
+
     def test_a_add_quad(self):
         client = CayleyClient(_CLIENT_URL)
         response = client.AddQuad('foo', 'to', 'bar')

@@ -161,6 +161,11 @@ class _Path(_GizmoQuery):
 
         return self
 
+    def HasR(self, predicate, object):
+        self._put("Has('%s', '%s')", object, predicate)
+
+        return self
+
     def Tag(self, *tags):
         self._put("Tag(%s)", json.dumps(tags))
 
