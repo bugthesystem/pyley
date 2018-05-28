@@ -3,6 +3,12 @@
 pyley
 =====
 
+.. image:: https://img.shields.io/pypi/v/pyley.svg
+    :target: https://pypi.org/project/pyley
+
+.. image:: https://img.shields.io/pypi/pyversions/pyley.svg
+    :target: https://pypi.org/project/pyley
+
 .. image:: https://travis-ci.org/ziyasal/pyley.svg?branch=master
     :target: https://travis-ci.org/ziyasal/pyley
 
