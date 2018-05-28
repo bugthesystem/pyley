@@ -24,7 +24,7 @@ def extract_metaitem(meta):
     raise RuntimeError('Unable to find __{meta}__ string.'.format(meta=meta))
 
 setup(
-    name='socket.io-emitter',
+    name='pyley',
     version=extract_metaitem('version'),
     license=extract_metaitem('license'),
     description=extract_metaitem('description'),
