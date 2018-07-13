@@ -110,5 +110,3 @@ License
 -------
 
 @ziλasal & @abdullahselek
-
-Code and documentation are available according to the *MIT* License (see `LICENSE <https://github.com/ziyasal/pyley/blob/master/LICENSE>`_).
