@@ -31,11 +31,11 @@ Sample
 
 Import pyley::
 
-    import pyley
+    from pyley import CayleyClient, GraphObject
 
     # Create cayley client
     client = CayleyClient() # this creates client with default parameters `http://localhost:64210/api/v1/query/gizmo`
-    #or  specify `url` and `version` parameters
+    # or  specify `url` and `version` parameters
     client = CayleyClient("http://localhost:64210", "v1")
   
     g = GraphObject()
