@@ -29,12 +29,16 @@ You can install pyley using::
 Sample
 ------
 
-Import pyley::
+**Import pyley:**
+
+.. code-block:: python
 
     from pyley import CayleyClient, GraphObject
 
     # Create cayley client
-    client = CayleyClient() # this creates client with default parameters `http://localhost:64210/api/v1/query/gizmo`
+    # this creates client with default parameters `http://localhost:64210/api/v1/query/gizmo`
+    client = CayleyClient()
+    
     # or  specify `url` and `version` parameters
     client = CayleyClient("http://localhost:64210", "v1")
   
@@ -53,7 +57,8 @@ Import pyley::
     query = g.V("Humphrey Bogart").All()
     response = client.Send(query)
     
-    # "Humphrey Bogart" is a name, but not an entity. Let's find the entities with this name in our dataset.
+    # "Humphrey Bogart" is a name, but not an entity. 
+    # Let's find the entities with this name in our dataset.
     # Follow links that are pointing In to our "Humphrey Bogart" node with the predicate "name".
     query = g.V("Humphrey Bogart").In("name").All()
     response = client.Send(query)
@@ -76,7 +81,8 @@ Import pyley::
 
     response = client.Send(query)
   
-    # But this is starting to get long. Let's use a morphism -- a pre-defined path stored in a variable -- as our linkage
+    # But this is starting to get long. 
+    # Let's use a morphism -- a pre-defined path stored in a variable -- as our linkage
     film_to_actor = g.Morphism().Out("/film/film/starring").Out("/film/performance/actor")
     query = g.V() \
             .Has("name", "Casablanca") \
