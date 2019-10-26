@@ -60,7 +60,7 @@ Sample
     # "Humphrey Bogart" is a name, but not an entity. 
     # Let's find the entities with this name in our dataset.
     # Follow links that are pointing In to our "Humphrey Bogart" node with the predicate "name".
-    query = g.V("Humphrey Bogart").In("name").All()
+    query = g.V("Humphrey Bogart").In("<name>").All()
     response = client.Send(query)
   
     # Notice that "name" is a generic predicate in our dataset. 
@@ -98,7 +98,9 @@ Sample
 Bugs
 ----
 
-If you encounter a bug, performance issue, or malfunction, please add an `Issues <https://github.com/ziyasal/pyley/issues>`_ with steps on how to reproduce the problem.
+If you encounter a bug, performance issue, or malfunction, please add an `Issues <https://github.com/ziyasal/pyley/issues>`_ with steps on how to reproduce the problem
+or feel to free to open a pull request.
+
 
 TODO
 ----

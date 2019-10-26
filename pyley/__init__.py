@@ -1,7 +1,7 @@
 """pyley Python client for an open-source graph database Cayley"""
 
 __title__        = 'pyley'
-__version__      = '0.2.2.1'
+__version__      = '0.2.2.2'
 __author__       = 'Ziya SARIKAYA @ziyasal'
 __email__        = 'sarikayaziya@gmail.com',
 __license__      = 'MIT License'
