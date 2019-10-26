@@ -5,6 +5,19 @@ _CLIENT_URL = 'http://localhost:64210'
 
 
 class CayleyClientTests(TestCase):
+
+    def test_add_limit(self):
+        client = CayleyClient(_CLIENT_URL)
+        client.add_query_limit(10000)
+        self.assertEqual(client.url, 'http://localhost:64210/api/v1/query/gizmo?limit=10000')
+
+
+    def test_add_limit_fails(self):
+        client = CayleyClient(_CLIENT_URL)
+        with self.assertRaises(Exception):
+            client.add_query_limit('str')
+
+
     def test_send(self):
         client = CayleyClient(_CLIENT_URL)
         g = GraphObject()
@@ -30,6 +43,7 @@ class CayleyClientTests(TestCase):
         self.assertTrue(response.r is not None)
         self.assertTrue(len(response.result) > 0)
 
+
     def test_a_add_quad(self):
         client = CayleyClient(_CLIENT_URL)
         response = client.AddQuad('foo', 'to', 'bar')
@@ -39,6 +53,7 @@ class CayleyClientTests(TestCase):
         query = g.V("foo").Out('to').Is('bar').All()
         response = client.Send(query)
         self.assertEqual(len(response.result['result']), 1)
+
 
     def test_b_delete_quad(self):
         client = CayleyClient(_CLIENT_URL)
@@ -50,6 +65,7 @@ class CayleyClientTests(TestCase):
         query = g.V("foo").Out('to').Is("bar").All()
         response = client.Send(query)
         self.assertIsNone(response.result['result'])
+
 
     def test_c_add_quads(self):
         client = CayleyClient(_CLIENT_URL)
